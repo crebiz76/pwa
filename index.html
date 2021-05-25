@@ -15,6 +15,7 @@
   <link rel="icon" type="image/png" sizes="32x32" href="images/icons/favicon-32x32.png">
 
   <title>안녕하세요! PWA by JS</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue"></script>
   <style>
     html,
     body {
@@ -39,10 +40,9 @@
 
 <body>
   <div class="container">
-    <h1>안녕하세요!</h1>
-    <img src="./images/hello-pwa.png" alt=""></img>
+    <h1>{{sTitle}}</h1>
+    <img src="./images/hello-pwa.png" alt="" v-on:click="fnChangeTitle"></img>
     <p>by JS</p>
-  </div>
   <!-- 1. 서비스 워커 등록 -->
   <script>
     if ('serviceWorker' in navigator) {
@@ -52,6 +52,25 @@
           console.log('서비스 워커가 등록됨!');
         })
     }
+
+    new Vue({
+      el: '.container',
+      data: {
+        sTitle: '안녕하세요!'
+      },
+      methods: {
+        // 버튼을 눌렀을 때 sTitle의 제목값 변경
+        fnChangeTitle(){
+          // this는 Vue 객체의 인스턴스를 가리킴
+          if(this.sTitle == 'Hello!'){
+              this.sTitle = '안녕하세요!';
+          }
+          else{
+              this.sTitle = 'Hello!';
+          }
+        }
+      }
+    });
   </script>
 </body>
 
